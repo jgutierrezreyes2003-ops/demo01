@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Persona</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 th:text="${persona.id != null} ? 'Editar Persona' : 'Crear Persona'"></h2>
+    
+    <form th:action="@{/crud/persona/save}" th:object="${persona}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input type="text" class="form-control" th:field="*{nombre}" required />
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-secondary" th:href="@{/crud/persona/}">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: demo01
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  backend:
+    image: profeleo/backend:latest
+    container_name: backend
+    build:
+      context: ./backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/demo01
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "8885:8080"
+    depends_on:
+      - postgres
+
+  frontend:
+    image: profeleo/frontend:latest
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - "9995:8081"
+    depends_on:
+      - postgres
+
+volumes:
+  pg-data:

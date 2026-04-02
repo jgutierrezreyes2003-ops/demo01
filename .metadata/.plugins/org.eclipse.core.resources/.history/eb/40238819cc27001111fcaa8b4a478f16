@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Mantenedor Persona API REST</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<h1>Mantenedor Personas</h1>
+
+<table id="example1" class="table table-bordered table-striped">
+
+ <thead>
+
+  <tr>
+
+   <!--<th>ID</th>-->
+
+   <th>NOMBRE</th>
+
+   <th>FUNCIONES</th>
+
+  </tr>
+
+ </thead>
+
+ <tbody>
+
+  <!-- Aquí deberías reemplazar este bloque con los datos de tu modelo de persona -->
+
+  <tr th:each="persona, iterStat : ${personas}">
+
+   <!--<td th:text="${persona.id}"></td>-->
+
+   <td th:text="${persona.nombre}"></td>
+
+   <td>
+
+    <!--<a class="btn btn-warning" th:href="@{admin/especificarProyecto' + ${persona.id}}">Editar</a>-->
+
+    <a class="btn btn-warning" th:href="@{/crud/persona/{id}(id=${persona.id})}"
+
+     target="_top">Editar</a>
+
+    <a class="btn btn-danger" th:href="@{/crud/persona/{id}(id=${persona.id})}"
+
+     target="_top">Borrar</a>
+
+   </td>
+
+  </tr>
+
+  <!-- Fin del bloque a reemplazar -->
+
+ </tbody>
+
+ <tfoot>
+
+  <tr>
+
+   <!--<th>ID</th>-->
+
+   <th>NOMBRE</th>
+
+   <th>FUNCIONES</th>
+
+  </tr>
+
+ </tfoot>
+
+</table>
+
+</body>
+
+</html>

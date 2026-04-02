@@ -1,0 +1,9 @@
+package com.example.demo.interfaces;
+
+public interface IPersonaService {
+	List<PersonaEntity> findAll();
+	PersonaEntity findById(Long id);
+	PersonaEntity save (PersonaEntity persona);
+	void deleteById(Long id);
+	
+}

@@ -1,0 +1,42 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.entity.PersonaEntity;
+import com.example.demo.interfaces.IPersonaService;
+
+@Controller
+@RequestMapping("crud/persona")
+public class PersonaController {
+
+    @Autowired
+    private IPersonaService service;
+
+    @GetMapping("/")
+    public String persona(Model model) {
+        List<PersonaEntity> personas = service.findAll();
+        model.addAttribute("personas", personas);
+        return "index";
+    }
+
+    @GetMapping("/{id}")
+    public String deleteById(@PathVariable Long id, Model model) {
+        try {
+            service.deleteById(id);
+        } catch (Exception e) {
+            // Aquí podrías manejar el error, por ejemplo enviando un mensaje al modelo
+            e.printStackTrace();
+        }
+        
+        List<PersonaEntity> personas = service.findAll();
+        model.addAttribute("personas", personas);
+        return "index";
+    }
+}

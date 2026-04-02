@@ -1,0 +1,20 @@
+package com.example.demo.interfaces;
+
+import java.util.List;
+import com.example.demo.entity.PersonaEntity;
+
+public interface IPersonaService {
+    
+    // Método para listar todos los registros
+    List<PersonaEntity> findAll();
+    
+    // Método para buscar un registro específico por su ID
+    PersonaEntity findById(Long id);
+    
+    // Método para guardar (crear o actualizar) un registro
+    PersonaEntity save(PersonaEntity persona);
+    
+    // Método para eliminar un registro por su ID
+    void deleteById(Long id);
+    
+}

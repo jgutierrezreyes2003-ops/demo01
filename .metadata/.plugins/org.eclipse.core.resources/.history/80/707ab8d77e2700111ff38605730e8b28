@@ -1,0 +1,30 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entity.PersonaEntity;
+import com.example.demo.interfaces.IPersonaService;
+
+@RestController
+@RequestMapping("/api/v1/entities/persona")
+public class PersonaController {
+	
+	@Autowired
+	private IPersonaService personaService;
+	
+	@GetMapping
+	public ResponseEntity<?> findAll(){
+		try {
+			return ResponseEntity.ok(personaService.listarTodos());
+		} catch (Exception e) {
+			return ResponseEntity.status(404).body(e);
+		}
+	}
+
+}
