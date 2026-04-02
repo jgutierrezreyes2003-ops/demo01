@@ -1,27 +1,24 @@
-version: '3'
-
 services:
   postgres:
-  image: postgres:latest
-  container_name: postgres
-  environment:
-    POSTGRES_USER: uss05
-    POSTGRES_PASSWORD: 310326
-    POSTGRES_DB: demo01
-  volumes:
-    - pg-data:/var/lib/postgresql/data
-  networks:
-    - app-network
+    image: postgres:latest
+    container_name: postgres_uss05
+    environment:
+      POSTGRES_USER: uss05
+      POSTGRES_PASSWORD: 310326
+      POSTGRES_DB: demo01
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - app-network   
 
   backend:
-    image: jgutierrezrs/backend:latest
-    container_name: backend
     build:
       context: ./demo02     
+    container_name: backend_uss05
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/demo01
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_DATASOURCE_USERNAME=uss05
+      - SPRING_DATASOURCE_PASSWORD=310326
     ports:
       - "8885:8885"
     depends_on:
@@ -30,10 +27,9 @@ services:
       - app-network
 
   frontend:
-    image: jgutierrezrs/frontend:latest
-    container_name: frontend
     build:
       context: ./demo03     
+    container_name: frontend_uss05
     ports:
       - "9995:9995"
     depends_on:
