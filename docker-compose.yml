@@ -12,30 +12,40 @@ services:
       - "5432:5432"
     volumes:
       - pg-data:/var/lib/postgresql/data
+    networks:
+      - app-network   
 
   backend:
-    image: profeleo/backend:latest
+    image: jgutierrezrs/backend:latest
     container_name: backend
     build:
-      context: ./backend
+      context: ./demo02     
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/demo01
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=1234
     ports:
-      - "8885:8080"
+      - "8885:8885"
     depends_on:
       - postgres
+    networks:
+      - app-network
 
   frontend:
-    image: profeleo/frontend:latest
+    image: jgutierrezrs/frontend:latest
     container_name: frontend
     build:
-      context: ./frontend
+      context: ./demo03     
     ports:
-      - "9995:8081"
+      - "9995:9995"
     depends_on:
-      - postgres
+      - backend      
+    networks:
+      - app-network
 
 volumes:
   pg-data:
+
+networks:
+  app-network: 
+    driver: bridge

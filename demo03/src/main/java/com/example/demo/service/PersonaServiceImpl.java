@@ -13,7 +13,8 @@ import com.example.demo.interfaces.IPersonaService;
 @Service
 public class PersonaServiceImpl implements IPersonaService {
 
-    private final String BASE_URL = "http://localhost:8080/api/v1/entities/persona/";
+    private final String BASE_URL = "http://backend:8885/api/v1/entities/persona/";
+    
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
@@ -44,11 +45,9 @@ public class PersonaServiceImpl implements IPersonaService {
     public PersonaEntity save(PersonaEntity persona) {
         try {
             if (persona.getId() != null) {
-
                 restTemplate.put(BASE_URL + persona.getId(), persona);
                 return persona;
             } else {
-
                 return restTemplate.postForObject(BASE_URL, persona, PersonaEntity.class);
             }
         } catch (Exception e) {
