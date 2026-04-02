@@ -2,18 +2,16 @@ version: '3'
 
 services:
   postgres:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: demo01
-    ports:
-      - "5432:5432"
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-    networks:
-      - app-network   
+  image: postgres:latest
+  container_name: postgres
+  environment:
+    POSTGRES_USER: uss05
+    POSTGRES_PASSWORD: 310326
+    POSTGRES_DB: demo01
+  volumes:
+    - pg-data:/var/lib/postgresql/data
+  networks:
+    - app-network
 
   backend:
     image: jgutierrezrs/backend:latest
